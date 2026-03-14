@@ -1,0 +1,32 @@
+<h2>Image Enhancement Tool</h2>
+
+<form action="/enhance" method="post" enctype="multipart/form-data">
+
+<%= csrf_meta_tags %>
+
+<label>Upload Image</label>
+<input type="file" name="image">
+
+<br><br>
+
+<label>Select Filter</label>
+
+<select name="filter">
+  <option value="blur">Blur</option>
+  <option value="sharpen">Sharpen</option>
+  <option value="edge_detection">Edge Detection</option>
+  <option value="histogram_equalization">Histogram Equalization</option>
+  <option value="brightness">Brightness</option>
+  <option value="contrast">Contrast</option>
+</select>
+
+<br><br>
+
+<label>Value (for brightness/contrast)</label>
+<input type="text" name="value">
+
+<br><br>
+
+<button type="submit">Enhance Image</button>
+
+</form>
