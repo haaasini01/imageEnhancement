@@ -1,32 +1,29 @@
 <h2>Image Enhancement Tool</h2>
 
-<form action="/enhance" method="post" enctype="multipart/form-data">
-
-<%= csrf_meta_tags %>
+<%= form_with url: "/enhance", method: :post, multipart: true, data: { turbo: false } do |f| %>
 
 <label>Upload Image</label>
-<input type="file" name="image">
+<%= f.file_field :image %>
 
 <br><br>
 
 <label>Select Filter</label>
-
-<select name="filter">
-  <option value="blur">Blur</option>
-  <option value="sharpen">Sharpen</option>
-  <option value="edge_detection">Edge Detection</option>
-  <option value="histogram_equalization">Histogram Equalization</option>
-  <option value="brightness">Brightness</option>
-  <option value="contrast">Contrast</option>
-</select>
+<%= f.select :filter, options_for_select([
+  ['Blur', 'blur'],
+  ['Sharpen', 'sharpen'],
+  ['Edge Detection', 'edge_detection'],
+  ['Histogram Equalization', 'histogram_equalization'],
+  ['Brightness', 'brightness'],
+  ['Contrast', 'contrast']
+]) %>
 
 <br><br>
 
 <label>Value (for brightness/contrast)</label>
-<input type="text" name="value">
+<%= f.text_field :value %>
 
 <br><br>
 
-<button type="submit">Enhance Image</button>
+<%= f.submit "Enhance Image" %>
 
-</form>
+<% end %>

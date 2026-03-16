@@ -6,7 +6,7 @@ class ImagesController < ApplicationController
   end
 
 
-  def enhance
+    def enhance
     uploaded_file = params[:image]
 
     unless uploaded_file
@@ -18,12 +18,11 @@ class ImagesController < ApplicationController
 
     filter = params[:filter].to_sym
 
-    case filter
-    when :brightness
+    if filter == :brightness
         value = params[:value].to_i
         result = ImageProcessor.apply(image, filter, value)
 
-    when :contrast
+    elsif filter == :contrast
         value = params[:value].to_f
         result = ImageProcessor.apply(image, filter, value)
 
@@ -31,17 +30,19 @@ class ImagesController < ApplicationController
         result = ImageProcessor.apply(image, filter)
     end
 
-    output_path = Rails.root.join("tmp", "processed.png")
+    filename = "processed_#{Time.now.to_i}.png"
+    output_path = Rails.root.join("public", filename)
 
     result.save(output_path)
+    
+    # Save original image to display it
+    orig_filename = "orig_#{Time.now.to_i}#{File.extname(uploaded_file.original_filename)}"
+    orig_output_path = Rails.root.join("public", orig_filename)
+    FileUtils.cp(uploaded_file.path, orig_output_path)
 
-    send_file output_path,
-                type: "image/png",
-                disposition: "inline"
+    @output_image = "/#{filename}"
+    @input_image = "/#{orig_filename}"
 
+    render :result
     end
-
-
-
-
 end

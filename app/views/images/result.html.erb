@@ -1,0 +1,16 @@
+<h2>Image Result</h2>
+
+<div style="display: flex; gap: 20px; align-items: flex-start;">
+  <div>
+    <h3>Original Image</h3>
+    <img src="<%= @input_image %>" style="max-width: 45vw; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
+  <div>
+    <h3>Enhanced Image (<%= params[:filter].titleize %>)</h3>
+    <img src="<%= @output_image %>" style="max-width: 45vw; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
+</div>
+
+<br><br>
+
+<a href="/">Process another image</a>
