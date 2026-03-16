@@ -1,29 +1,34 @@
-<h2>Image Enhancement Tool</h2>
+<div class="container">
+  <div class="header">
+    <h2>Image Enhancement</h2>
+    <p>Upload an image and apply beautiful filters powered by advanced algorithms.</p>
+  </div>
 
-<%= form_with url: "/enhance", method: :post, multipart: true, data: { turbo: false } do |f| %>
-
-<label>Upload Image</label>
-<%= f.file_field :image %>
-
-<br><br>
-
-<label>Select Filter</label>
-<%= f.select :filter, options_for_select([
-  ['Blur', 'blur'],
-  ['Sharpen', 'sharpen'],
-  ['Edge Detection', 'edge_detection'],
-  ['Histogram Equalization', 'histogram_equalization'],
-  ['Brightness', 'brightness'],
-  ['Contrast', 'contrast']
-]) %>
-
-<br><br>
-
-<label>Value (for brightness/contrast)</label>
-<%= f.text_field :value %>
-
-<br><br>
-
-<%= f.submit "Enhance Image" %>
-
-<% end %>
+  <%= form_with url: "/enhance", method: :post, multipart: true, data: { turbo: false } do |f| %>
+    <div class="form-group">
+      <label for="image_upload">Upload Image</label>
+      <%= f.file_field :image, class: "form-control", id: "image_upload", required: true, accept: "image/*" %>
+    </div>
+    
+    <div class="form-group">
+      <label for="filter_select">Select Filter</label>
+      <%= f.select :filter, options_for_select([
+        ['Blur', 'blur'],
+        ['Sharpen', 'sharpen'],
+        ['Edge Detection', 'edge_detection'],
+        ['Histogram Equalization', 'histogram_equalization'],
+        ['Brightness', 'brightness'],
+        ['Contrast', 'contrast']
+      ]), {}, { class: "form-control", id: "filter_select" } %>
+    </div>
+    
+    <div class="form-group">
+      <label for="value_input">Value (for brightness/contrast)</label>
+      <%= f.text_field :value, class: "form-control", id: "value_input", placeholder: "e.g., 50 (optional for some filters)" %>
+    </div>
+    
+    <div class="actions" style="margin-top: 2rem;">
+      <%= f.submit "Enhance Image", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

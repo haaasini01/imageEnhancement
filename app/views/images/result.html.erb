@@ -1,16 +1,26 @@
-<h2>Image Result</h2>
-
-<div style="display: flex; gap: 20px; align-items: flex-start;">
-  <div>
-    <h3>Original Image</h3>
-    <img src="<%= @input_image %>" style="max-width: 45vw; border: 1px solid #ccc; border-radius: 4px;">
+<div class="container" style="max-width: 1100px;">
+  <div class="header">
+    <h2>Image Result</h2>
+    <p>Your enhanced image is ready.</p>
   </div>
-  <div>
-    <h3>Enhanced Image (<%= params[:filter].titleize %>)</h3>
-    <img src="<%= @output_image %>" style="max-width: 45vw; border: 1px solid #ccc; border-radius: 4px;">
+
+  <div class="results-grid">
+    <div class="result-card original">
+      <h3>Original Image</h3>
+      <div class="result-image-container">
+        <img src="<%= @input_image %>" class="result-image" alt="Original Upload">
+      </div>
+    </div>
+    <div class="result-card enhanced">
+      <h3>Enhanced Image (<%= params[:filter].titleize %>)</h3>
+      <div class="result-image-container">
+        <img src="<%= @output_image %>" class="result-image" alt="Enhanced Result">
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a href="/" class="btn-outline">Process another image</a>
+    <a href="<%= @output_image %>" download="enhanced_image" class="btn-primary">Download Image</a>
   </div>
 </div>
-
-<br><br>
-
-<a href="/">Process another image</a>
