@@ -1,17 +1,8 @@
 module ImageProcessing
   class Blur
-
-    KERNEL = [
-      [1.0/25,1.0/25,1.0/25,1.0/25,1.0/25],
-      [1.0/25,1.0/25,1.0/25,1.0/25,1.0/25],
-      [1.0/25,1.0/25,1.0/25,1.0/25,1.0/25],
-      [1.0/25,1.0/25,1.0/25,1.0/25,1.0/25],
-      [1.0/25,1.0/25,1.0/25,1.0/25,1.0/25]
-    ]
-
     def self.apply(image)
-      Convolution.apply(image, KERNEL)
+      image.blur("0x8")
+      image
     end
-
   end
 end

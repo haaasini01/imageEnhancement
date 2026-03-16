@@ -1,4 +1,4 @@
-require "chunky_png"
+require "mini_magick"
 
 class ImagesController < ApplicationController
 
@@ -14,7 +14,7 @@ class ImagesController < ApplicationController
         return
     end
 
-    image = ChunkyPNG::Image.from_file(uploaded_file.path)
+    image = MiniMagick::Image.open(uploaded_file.path)
 
     filter = params[:filter].to_sym
 
@@ -30,13 +30,16 @@ class ImagesController < ApplicationController
         result = ImageProcessor.apply(image, filter)
     end
 
-    filename = "processed_#{Time.now.to_i}.png"
+    ext = File.extname(uploaded_file.original_filename).downcase
+    ext = ".jpg" if ext.empty?
+    
+    filename = "processed_#{Time.now.to_i}#{ext}"
     output_path = Rails.root.join("public", filename)
 
-    result.save(output_path)
+    result.write(output_path.to_s)
     
     # Save original image to display it
-    orig_filename = "orig_#{Time.now.to_i}#{File.extname(uploaded_file.original_filename)}"
+    orig_filename = "orig_#{Time.now.to_i}#{ext}"
     orig_output_path = Rails.root.join("public", orig_filename)
     FileUtils.cp(uploaded_file.path, orig_output_path)
 

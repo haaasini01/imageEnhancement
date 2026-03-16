@@ -1,15 +1,8 @@
 module ImageProcessing
   class Sharpen
-
-    KERNEL = [
-      [0,-1,0],
-      [-1,5,-1],
-      [0,-1,0]
-    ]
-
     def self.apply(image)
-      Convolution.apply(image, KERNEL)
+      image.sharpen("0x3")
+      image
     end
-
   end
 end

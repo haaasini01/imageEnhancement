@@ -68,4 +68,4 @@ end
 
 
 # new
-gem "chunky_png"
+gem "mini_magick"
