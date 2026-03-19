@@ -4,6 +4,7 @@ require_relative "image_processing/edge_detection"
 require_relative "image_processing/brightness"
 require_relative "image_processing/contrast"
 require_relative "image_processing/histogram_equalization"
+require_relative "image_processing/grayscale"
 
 class ImageProcessor
 
@@ -13,7 +14,8 @@ class ImageProcessor
     edge_detection: ImageProcessing::EdgeDetection,
     brightness: ImageProcessing::Brightness,
     contrast: ImageProcessing::Contrast,
-    histogram_equalization: ImageProcessing::HistogramEqualization
+    histogram_equalization: ImageProcessing::HistogramEqualization,
+    grayscale: ImageProcessing::Grayscale
   }
 
   def self.apply(image, filter, *args)
