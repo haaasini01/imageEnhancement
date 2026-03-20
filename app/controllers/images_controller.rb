@@ -26,6 +26,16 @@ class ImagesController < ApplicationController
         value = params[:value].to_f
         result = ImageProcessor.apply(image, filter, value)
 
+    elsif filter == :oil_painting
+        radius = params[:radius].to_i
+        radius = 4 if radius.zero?
+        result = ImageProcessor.apply(image, filter, radius)
+
+    elsif filter == :watercolor
+        intensity = params[:intensity].to_i
+        intensity = 3 if intensity.zero?
+        result = ImageProcessor.apply(image, filter, intensity)
+
     else
         result = ImageProcessor.apply(image, filter)
     end

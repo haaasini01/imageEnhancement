@@ -19,13 +19,21 @@
         ['Histogram Equalization', 'histogram_equalization'],
         ['Brightness', 'brightness'],
         ['Contrast', 'contrast'],
-        ['Grayscale', 'grayscale']
+        ['Grayscale', 'grayscale'],
+        ['--- Artistic Filters ---', nil, { disabled: true }],
+        ['Cartoon Effect', 'cartoon_effect'],
+        ['Pencil Sketch', 'pencil_sketch'],
+        ['Oil Painting', 'oil_painting'],
+        ['Watercolor', 'watercolor'],
+        ['Vintage / Sepia Tone', 'vintage_sepia']
       ]), {}, { class: "form-control", id: "filter_select" } %>
     </div>
     
     <div class="form-group">
-      <label for="value_input">Value (for brightness/contrast)</label>
-      <%= f.text_field :value, class: "form-control", id: "value_input", placeholder: "e.g., 50 (optional for some filters)" %>
+      <label for="value_input">Parameters (optional)</label>
+      <%= f.text_field :value, class: "form-control", id: "value_input", placeholder: "Brightness: 0-200, Contrast: 0.5-3.0" %>
+      <%= f.text_field :radius, class: "form-control", id: "radius_input", placeholder: "Oil Painting radius (1-10, default: 4)", style: "margin-top: 0.5rem;" %>
+      <%= f.text_field :intensity, class: "form-control", id: "intensity_input", placeholder: "Watercolor intensity (1-10, default: 3)", style: "margin-top: 0.5rem;" %>
     </div>
     
     <div class="actions" style="margin-top: 2rem;">
